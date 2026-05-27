@@ -1,0 +1,18 @@
+services:
+  - type: worker
+    name: all-lang-to-persian-bot
+    runtime: python
+    buildCommand: |
+      apt-get update && apt-get install -y \
+        tesseract-ocr \
+        tesseract-ocr-ara \
+        tesseract-ocr-fas \
+        tesseract-ocr-rus \
+        tesseract-ocr-chi-sim \
+        tesseract-ocr-jpn \
+        tesseract-ocr-kor \
+      && pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
